@@ -14,7 +14,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 class Program
 {
-    private static TelegramBotClient botClient = new TelegramBotClient("7467683601:AAFaLXuw1u0yCEAvzX3vAZcAPYfL-wOXd-s");
+    private static TelegramBotClient botClient = new TelegramBotClient("tg_bot_id");
     private static Dictionary<long, UserData> userData = new Dictionary<long, UserData>();
 
     private static string ud_file = Environment.CurrentDirectory + "/userData.json";
@@ -123,7 +123,7 @@ class Program
             var newUser = new UserData();
             newUser.UserId = userId;
             newUser.UserName = update.Message.Chat.Username;
-            if (newUser.UserName == "dorinov")
+            if (newUser.UserName == "nickname")
                 newUser.IsAdmin = true;
             userData.Add(userId, newUser);
             await botClient.SendTextMessageAsync(userId, "Привет 🙋\r\nЯ бот, который будет отсчитывать для тебя время ⏰\r\n \r\nНапиши мне последний временной поинт в формате '13:46' 👇");
@@ -255,7 +255,7 @@ class Program
         }
         if (cmd[0].ToLower() == "admin")
         {
-            if (cmd[1].ToLower() != "dorinov")
+            if (cmd[1].ToLower() != "nickname")
                 AdminChange(cmd[1]);
             else
                 await botClient.SendTextMessageAsync(userId, "Пасаси");
@@ -263,7 +263,7 @@ class Program
         }
         if (cmd[0].ToLower() == "ban")
         {
-            if (cmd[1].ToLower() != "dorinov")
+            if (cmd[1].ToLower() != "nickname")
                 BanUnban(cmd[1], true);
             else
                 await botClient.SendTextMessageAsync(userId, "Пасаси");
